@@ -1,7 +1,9 @@
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:floppy_bird/game/game_manager.dart';
 
-class Pipe extends SpriteComponent with HasGameRef<GameManager> {
+class Pipe extends SpriteComponent
+    with HasGameRef<GameManager>, CollisionCallbacks {
   final double pipeGap = 200;
 
   int speed = 100;
@@ -22,6 +24,8 @@ class Pipe extends SpriteComponent with HasGameRef<GameManager> {
       anchor = Anchor.bottomCenter;
       y = 0;
     }
+
+    add(RectangleHitbox());
   }
 
   @override

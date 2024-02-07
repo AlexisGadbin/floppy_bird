@@ -15,16 +15,21 @@ class GameManager extends FlameGame with PanDetector {
     });
     add(_mainScreen);
     _gameScreen = GameScreen();
-    // _mainScreen = MainScreen(() {
-    //   remove(_mainScreen);
-    //   add(_gameScreen);
-    // });
-    // _gameScreen = GameScreen();
-    // add(_gameScreen);
   }
 
   @override
   void onPanStart(DragStartInfo info) {
-    _mainScreen.onPanStart(info);
+    if (_mainScreen.isMounted) {
+      _mainScreen.onPanStart(info);
+    } else {
+      _gameScreen.onPanStart(info);
+    }
+  }
+
+  void gameOver() {
+    remove(_gameScreen);
+    _gameScreen = GameScreen();
+
+    add(_mainScreen);
   }
 }

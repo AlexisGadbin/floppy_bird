@@ -1,7 +1,9 @@
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:floppy_bird/game/game_manager.dart';
 
-class Ground extends SpriteComponent with HasGameRef<GameManager> {
+class Ground extends SpriteComponent
+    with HasGameRef<GameManager>, CollisionCallbacks {
   final int _index;
   int speed = 100;
   static const double groundHeight = 120;
@@ -18,6 +20,8 @@ class Ground extends SpriteComponent with HasGameRef<GameManager> {
     }
 
     height = groundHeight;
+
+    add(RectangleHitbox());
   }
 
   @override
